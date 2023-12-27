@@ -2,6 +2,7 @@ let allButtons = document.querySelectorAll(".button");
 let restart = document.querySelector("#restart");
 let win = document.querySelector("#winner");
 let showTurn = document.querySelector("#turn");
+let container = document.querySelector(".container");
 let count = 0;
 // winner box  array .....
 const winnerArray = [
@@ -28,10 +29,11 @@ function playerTurn(btn) {
   } else {
     btn.innerText = "O";
     turn = "X";
-    btn.style.color = "blue";
+    btn.style.color = "aqua";
     btn.disabled = true;
   }
 }
+let index = "";
 showTurn.innerText = `Turn of O`;
 allButtons.forEach((button) => {
   // restart logic......
@@ -44,6 +46,7 @@ allButtons.forEach((button) => {
     showTurn.innerText = `Turn of O`;
     showTurn.innerText = `Turn of ${turn}`;
     showTurn.style.display = "block";
+    container.classList.remove(index);
   });
 
   button.addEventListener("click", () => {
@@ -54,7 +57,16 @@ allButtons.forEach((button) => {
 });
 
 // check winner .......
-
+const obj = {
+  1: "one",
+  2: "two",
+  3: "three",
+  4: "four",
+  5: "five",
+  6: "six",
+  7: "seven",
+  8: "eight",
+};
 function checkWinner() {
   // match draw logic .....
   count += 1;
@@ -73,6 +85,11 @@ function checkWinner() {
         winner = pos1;
         showTurn.style.display = "none";
         win.innerText = `Winner is ${pos1} `;
+        index = obj[winnerArray.indexOf(arr) + 1];
+        console.log(index);
+        container.classList.add(index);
+
+        // if()
         allButtons.forEach((button) => {
           button.disabled = true;
         });
